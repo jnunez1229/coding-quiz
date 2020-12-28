@@ -72,3 +72,7 @@ main h2{
     top: .1em;
     
 }
+
+#quiz{
+    display: none;
+}
