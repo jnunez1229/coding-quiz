@@ -9,6 +9,7 @@ const choiceC = document.getElementById('C');
 const choiceD = document.getElementById('D'); 
 let timeLeft = 75;
 
+
 // Quiz Questions
 let questions = [
   {
@@ -126,12 +127,16 @@ let countdown = function() {
 
 // Checks to see if user answer is correct
 let checkAnswer = function(answer){
+  let feedbackEl = document.getElementById("feedback");
+
   if(questions[runningQuestionIndex].correct === answer){
-    alert("Correct!");
+    feedbackEl.innerHTML = "<h3 style='color:green;'>CORRECT!</h3>";
+    
     runningQuestionIndex++
     renderQuestion();
   }else{
-    alert("Wrong!");
+    feedbackEl.innerHTML = "<h3 style='color:red;'>WRONG!</h3>";
+
     runningQuestionIndex++
     renderQuestion();
     timeLeft-=10;

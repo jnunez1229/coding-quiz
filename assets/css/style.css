@@ -28,10 +28,10 @@ header a:hover{
 #main, #quiz{
     text-align: center;
     height: 100%;
-    margin: 5% 20% 2%;
+    margin: 5% 20%;
     background: white;
     border-radius: 10px;
-    padding: 5%;
+    padding: 3%;
 }
 
 #main h1{
@@ -43,6 +43,12 @@ header a:hover{
     margin-bottom: 30px;
     font-size: 1.4em;
     font-weight: 300;
+}
+
+#quiz h3{
+    text-decoration: underline;
+    font-style: italic;
+    margin-top: 1em;
 }
 
 .btn{
