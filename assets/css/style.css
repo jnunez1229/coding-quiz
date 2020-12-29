@@ -25,21 +25,21 @@ header a:hover{
     text-decoration: underline;
 }
 
-main{
+#main, #quiz{
     text-align: center;
     height: 100%;
-    margin: 5% 20% 3%;
+    margin: 5% 20% 2%;
     background: white;
     border-radius: 10px;
     padding: 5%;
 }
 
-main h1{
+#main h1{
     margin-bottom: 20px;
     font-size: 4em;
 }
 
-main h2{
+#main h2{
     margin-bottom: 30px;
     font-size: 1.4em;
     font-weight: 300;
@@ -75,4 +75,10 @@ main h2{
 
 #quiz{
     display: none;
+    text-align: left;
 }
+
+#quiz #question{
+    margin-bottom: 2em;
+}
+
