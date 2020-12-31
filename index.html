@@ -10,43 +10,42 @@
 </head>
 <body>
     <header>
-        <a href="#high-score">View High Scores</a>
-        <h4 >Time Left: <span id="timer" style="color: green;"></span> </h4>
+        <a href="#high-score" id="score-btn">View High Scores</a>
+        <h4 >Time Left: <span id="timer"></span> </h4>
     </header>
     <main id="main" class="container">
         <h1>Coding Quiz</h1>
-        <h3>
-            Click on the START button to begin your timed quiz! 
-            <br>
-            Keep in mind, for every wrong answer, ten seconds will be knocked off of your timer. 
+        <p>
+            You will have 75 seconds to answer all of the questions. For every wrong answer, ten seconds will be knocked off of your timer. Your score will be based off of how many seconds you have left at the end of the quiz.
             <br>
             <br>
-            Best of luck!
-        </h3>
+            Best of Luck!
+        </p>
+
         <button class="btn" id="start">START</button>
     </main>
 
     <section id="quiz" class="container">
         <div id="question">
-            <h2>Question</h2>
+            <h2></h2>
         </div>
-        <div class="class btn" id="A">A</div>
-        <div class="class btn" id="B">B</div>
-        <div class="class btn" id="C">C</div>
-        <div class="class btn" id="D">D</div>
+        <div class="class btn" id="A"></div>
+        <div class="class btn" id="B"></div>
+        <div class="class btn" id="C"></div>
+        <div class="class btn" id="D"></div>
         <h3 id="feedback"></h3>
     </section>
 
     
     <section id="record-score" class="container">
         <h2>All Done!</h2>
-        <h3 id="user-score">Your final score is </h3>
+        <h3>Your final score is: <span id="user-score"></span></h3>
 
         <form action="">
             <label for="user-initials">Enter Initials:</label>
             <input type="text" id="user-initials" name="user-initials">
             <br>
-            <input type="submit" class="btn">
+            <input type="submit" class="btn" id="submit">
         </form>
         
     </section>

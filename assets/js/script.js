@@ -84,6 +84,8 @@ let questions = [
 
 //Global Variables
 const startBtn = document.getElementById('start');
+const scoreBtn = document.getElementById("score-btn");
+const submitBtn = document.getElementById("submit");
 const timerEl = document.getElementById('timer');
 const mainEl = document.getElementById('main');
 const quizEl = document.getElementById('quiz');
@@ -93,26 +95,29 @@ const choiceB = document.getElementById('B');
 const choiceC = document.getElementById('C');
 const choiceD = document.getElementById('D');
 const recordScoreEl = document.getElementById('record-score');
+const userScoreEl = document.getElementById('user-score');
 const highScoreEl = document.getElementById('high-score');
 
 
 let timeLeft = 75;
-let score = 0;
 let lastQuestionIndex = questions.length - 1;
 let runningQuestionIndex = 0;
 
 
-// Timer that counts down from 75
+
 function countdown() {
-  timerEl.textContent =  timeLeft;
-  // setInterval to 1000ms. timer changes color to alert user that time is running out.
+  // setInterval to 1000ms. 
   let timeInterval = setInterval(function() {
     timeLeft--
     timerEl.textContent =  timeLeft;
 
+    // timer changes color to alert user that time is running out.
     if(timeLeft <= 0){
-      timerEl.textContent = '0';
       clearInterval(timeInterval);
+      alert("Time's Up!");
+      timeLeft = 0;
+      timerEl.textContent ="";
+      renderScore();
      
     }else if(timeLeft < 31){
       timerEl.style.color = "orange";
@@ -122,7 +127,15 @@ function countdown() {
       
     }
     
+    // If user reaches last question before timer runs out, clearInterval 
+    if(runningQuestionIndex > lastQuestionIndex){
+    clearInterval(timeInterval);
+    alert("You have completed the quiz! Click OK to save your score!");
+    renderScore();
+    }
+
   }, 1000);
+
 }
 
 //renders questions for user
@@ -142,25 +155,44 @@ let checkAnswer = function(event){
   console.log(answer);
   let feedbackEl = document.getElementById("feedback");
 
+  // Correct? notify user, move on to next question
   if(questions[runningQuestionIndex].correct === answer){
     feedbackEl.innerHTML = "<h3 style='color:green;'>CORRECT!</h3>";
-    
-    runningQuestionIndex++
+    runningQuestionIndex++;
     renderQuestion();
-    score+=10
-  }else{
+  }
+  
+  // Incorrect? notify user, move on, and subtract 10 from timeLeft
+  else{
     feedbackEl.innerHTML = "<h3 style='color:red;'>INCORRECT!</h3>";
-
-    runningQuestionIndex++
+    runningQuestionIndex++;
     renderQuestion();
     timeLeft-=10;
+
   }
+
 }
 
+function renderScore(){
+  quizEl.style.display = "none";
+  userScoreEl.textContent = timeLeft;
+  userScoreEl.style.fontWeight = "700";
+  userScoreEl.style.textDecoration = "underline";
+  recordScoreEl.style.display = "block";
 
+}
+
+function highScore(){
+  event.preventDefault();
+  recordScoreEl.style.display = "none";
+  highScoreEl.style.display = "block";
+}
 
 let startQuiz = function(){
   mainEl.style.display = "none";
+  // Timer displays 75
+  timerEl.textContent =  timeLeft;
+
   countdown();
   renderQuestion();
   quizEl.style.display = "block";
@@ -171,5 +203,9 @@ choiceA.addEventListener("click", checkAnswer);
 choiceB.addEventListener("click", checkAnswer);
 choiceC.addEventListener("click", checkAnswer);
 choiceD.addEventListener("click", checkAnswer);
+submitBtn.addEventListener("click", highScore);
+
+// scoreBtn.onclick = viewScore;
+// submitBtn.onclick = highScore;
 startBtn.onclick = startQuiz;
   

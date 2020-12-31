@@ -10,10 +10,10 @@ body{
 }
 
 section{
-    /* display: none; */
+    display: none;
 }
 
-h3{
+h3, p{
     font-size: 1.4em;
     font-weight: 300;
 }
@@ -70,6 +70,10 @@ header a:hover{
     text-decoration: underline;
 }
 
+#timer{
+    color: green;
+}
+
 
 /* Starting page */
 #main h1{
@@ -77,7 +81,7 @@ header a:hover{
     font-size: 4em;
 }
 
-#main h3{
+#main p{
     margin-bottom: 30px;
 }
 
@@ -97,6 +101,7 @@ header a:hover{
     font-weight: 700;
     font-size: 1.5em;
 }
+
 
 /* Record-Score */
 #record-score h3{
