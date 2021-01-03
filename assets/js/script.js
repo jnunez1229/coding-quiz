@@ -135,7 +135,6 @@ function countdown() {
     // If user reaches last question before timer runs out, clearInterval 
     if(runningQuestionIndex > lastQuestionIndex){
     clearInterval(timeInterval);
-    alert("You have completed the quiz! Click OK to save your score!");
     displayUserScore();
     }
 
