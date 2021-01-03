@@ -183,6 +183,8 @@ let checkAnswer = function(event){
 
 function displayUserScore(){
   quizEl.style.display = "none";
+  timerEl.textContent = "";
+  scoreCounterEl.textContent ="";
   userScoreEl.textContent = scoreCounter;
   userScoreEl.style.fontWeight = "700";
   userScoreEl.style.textDecoration = "underline";
