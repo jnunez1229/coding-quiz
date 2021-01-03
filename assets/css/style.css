@@ -70,6 +70,10 @@ header a:hover{
     text-decoration: underline;
 }
 
+#home-btn{
+    display: none;
+}
+
 #timer{
     color: green;
 }
@@ -110,4 +114,17 @@ header a:hover{
 
 #record-score .btn{
     margin: 1.24em 0;
+}
+
+/* High-Score */
+#score-display{
+    margin: 1em auto;
+}
+
+#score-display thead{
+    font-weight: 700;
+}
+
+#score-display td{
+    padding-right: 1em;
 }

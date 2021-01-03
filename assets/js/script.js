@@ -84,9 +84,12 @@ let questions = [
 
 //Global Variables
 const startBtn = document.getElementById('start');
-const scoreBtn = document.getElementById("score-btn");
-const submitBtn = document.getElementById("submit");
+const scoreBtn = document.getElementById('score-btn');
+const homeBtn = document.getElementById('home-btn');
+const submitBtn = document.getElementById('submit');
+const scoreCounterEl = document.getElementById('score-counter');
 const timerEl = document.getElementById('timer');
+const headerEl = document.getElementById('header');
 const mainEl = document.getElementById('main');
 const quizEl = document.getElementById('quiz');
 const questionEl = document.getElementById('question');
@@ -100,8 +103,10 @@ const highScoreEl = document.getElementById('high-score');
 
 
 let timeLeft = 75;
+let scoreCounter = 0;
 let lastQuestionIndex = questions.length - 1;
 let runningQuestionIndex = 0;
+let scoreH3 = document.createElement("h3");
 
 
 
@@ -117,7 +122,7 @@ function countdown() {
       alert("Time's Up!");
       timeLeft = 0;
       timerEl.textContent ="";
-      renderScore();
+      displayUserScore();
      
     }else if(timeLeft < 31){
       timerEl.style.color = "orange";
@@ -131,7 +136,7 @@ function countdown() {
     if(runningQuestionIndex > lastQuestionIndex){
     clearInterval(timeInterval);
     alert("You have completed the quiz! Click OK to save your score!");
-    renderScore();
+    displayUserScore();
     }
 
   }, 1000);
@@ -158,6 +163,7 @@ let checkAnswer = function(event){
   // Correct? notify user, move on to next question
   if(questions[runningQuestionIndex].correct === answer){
     feedbackEl.innerHTML = "<h3 style='color:green;'>CORRECT!</h3>";
+    scoreCounter+=10
     runningQuestionIndex++;
     renderQuestion();
   }
@@ -167,35 +173,70 @@ let checkAnswer = function(event){
     feedbackEl.innerHTML = "<h3 style='color:red;'>INCORRECT!</h3>";
     runningQuestionIndex++;
     renderQuestion();
+    scoreCounter-=5
     timeLeft-=10;
 
   }
-
+  // Display Score on browser
+  scoreCounterEl.textContent = scoreCounter;
 }
 
-function renderScore(){
+function displayUserScore(){
   quizEl.style.display = "none";
-  userScoreEl.textContent = timeLeft;
+  userScoreEl.textContent = scoreCounter;
   userScoreEl.style.fontWeight = "700";
   userScoreEl.style.textDecoration = "underline";
-  recordScoreEl.style.display = "block";
+  recordScoreEl.style.display = "block"; 
 
 }
 
-function highScore(){
+function renderHighScore(){
+  // get user initials
+  let userInitials = document.getElementById("user-initials").value;
+
+
+  // high score object
+  const result = {user: userInitials, score: scoreCounter};
+
+  // get the score, or the initial value if empty
+  const savedScores = localStorage.getItem('highscore') || '[]'; 
+
+  // add the result and display 5 highest scores
+  const highScores = [...JSON.parse(savedScores), result] 
+    .sort((a, b) => b.score- a.score) // sort descending
+    .slice(0, 5) // take highest 5
+  
+  // store the scores
+  localStorage.setItem('highscore', JSON.stringify(highScores)); 
+
+  let highScoreTbl = document.getElementById("score-display");
+
+  for (let i = 0; i < highScores.length; i++) {
+    highScoreTbl.innerHTML += '<tr><td>' + (i+1) + '</td><td>' + highScores[i].user + '</td><td>' + highScores[i].score + '</td></tr>';
+  }
+  
+}
+
+function displayHighScore(){
   event.preventDefault();
+  renderHighScore();
+  
+  mainEl.style.display = "none";
+  scoreBtn.style.display = "none"
   recordScoreEl.style.display = "none";
+  homeBtn.style.display = "block";
   highScoreEl.style.display = "block";
 }
 
 let startQuiz = function(){
   mainEl.style.display = "none";
+  scoreBtn.style.display = "none";
   // Timer displays 75
   timerEl.textContent =  timeLeft;
-
   countdown();
   renderQuestion();
   quizEl.style.display = "block";
+  homeBtn.style.display = "block";
   
 }
 
@@ -203,9 +244,8 @@ choiceA.addEventListener("click", checkAnswer);
 choiceB.addEventListener("click", checkAnswer);
 choiceC.addEventListener("click", checkAnswer);
 choiceD.addEventListener("click", checkAnswer);
-submitBtn.addEventListener("click", highScore);
+submitBtn.addEventListener("click", displayHighScore);
+scoreBtn.addEventListener("click", displayHighScore);
+startBtn.addEventListener("click", startQuiz);
 
-// scoreBtn.onclick = viewScore;
-// submitBtn.onclick = highScore;
-startBtn.onclick = startQuiz;
   

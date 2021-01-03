@@ -9,14 +9,20 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header>
-        <a href="#high-score" id="score-btn">View High Scores</a>
+    <header id="header">
+        <div>  
+            <a href="#high-score" id="score-btn">View High Scores</a>
+            <a href="./index.html" id="home-btn">Return Home</a>
+            
+        </div>
+        <h4>Score: <span id="score-counter"></span> </h4>
         <h4 >Time Left: <span id="timer"></span> </h4>
     </header>
     <main id="main" class="container">
         <h1>Coding Quiz</h1>
+    
         <p>
-            You will have 75 seconds to answer all of the questions. For every wrong answer, ten seconds will be knocked off of your timer. Your score will be based off of how many seconds you have left at the end of the quiz.
+            You will have 75 seconds to answer all of the questions. For every correct answer, you will receive 10 points. For every wrong answer, 10 seconds will be knocked off of your timer, and 5 points will be deducted from score.
             <br>
             <br>
             Best of Luck!
@@ -52,6 +58,13 @@
 
     <section id="high-score" class="container" >
         <h2>High Score</h2>
+        <table id="score-display">
+            <thead>
+                <td>Ranking</td>
+                <td>User Initials</td>
+                <td>User Score</td>
+            </thead>
+        </table>
     </section>
 
     
