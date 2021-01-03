@@ -7,7 +7,7 @@
 
 *   User can save score and initials. highest five scores are saved on leadership board
 
-*   Link to Deployed Site: (https://jnunez1229.github.io/password-generator/)
+*   Link to Deployed Site: (https://jnunez1229.github.io/coding-quiz/)
  
 ### Screenshot
 
